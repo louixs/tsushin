@@ -9,8 +9,6 @@ process=$!
 sleep 1.5
 #echo "killing last run PID: " $process
 pkill -P $process          
-#echo "netstat.db " 
-#cat netstat.db
 
 in=$(cat tsushin.db | awk '{print $1}')
 out=$(cat tsushin.db | awk '{print $2}')

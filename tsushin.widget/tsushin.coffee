@@ -1,9 +1,10 @@
 # Tsushin widget for ubersicht
 # network throughput in kB
 # Heavily inspired by Dion Munk's work network-throughput http://tracesof.net/uebersicht-widgets/#ubersicht-network-throughput
-# please note it assumes that .bash_profile exists in current user's home directory 
+# please note it assumes that .bash_profile exists in current user's home directory
+# source $HOME/.bash_profile  &&
 command: """
-          source $HOME/.bash_profile  &&
+          
           ./tsushin.sh
 """
 # The refresh frequency in milliseconds
