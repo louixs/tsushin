@@ -2,11 +2,12 @@
 # network throughput in kB
 # Heavily inspired by Dion Munk's work network-throughput http://tracesof.net/uebersicht-widgets/#ubersicht-network-throughput
 # please note it assumes that .bash_profile exists in current user's home directory
-# source $HOME/.bash_profile  &&
+
 command: """
-          
-          ./tsushin.sh
+  source .bash_profile  &&
+ ./tsushin.sh
 """
+
 # The refresh frequency in milliseconds
 refreshFrequency: 1700
 
@@ -31,7 +32,7 @@ afterRender: (domEl) ->
       backgroundColor: null
       style:
         color: '#7eFFFF'
-        fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Melno'
+        fontFamily:'hack,  Monaco, Melno, Courier, Helvetica Neue, Osaka'
         fontSize: '12px'
     navigator:
       enabled: false
@@ -120,17 +121,12 @@ afterRender: (domEl) ->
 
 update:(output,domEl) ->
   #How to dynamically update data for highcharts/stock
-  #http://stackoverflow.com/questions/16061032/highcharts-series-data-array
-  #http://stackoverflow.com/questions/13049977/how-can-i-get-access-to-a-highcharts-chart-through-a-dom-container
+  #http://stackoverflow.com/questions/16061032/highcharts-series-data-array   #http://stackoverflow.com/questions/13049977/how-can-i-get-access-to-a-highcharts-chart-through-a-dom-container
   #http://api.highcharts.com/highstock/Series.addPoint()
    @run './tsushin.sh', (err, output) ->
       data=output.split(" ");
       dataIn = parseFloat(data[0]);
       dataOut = parseFloat(data[1]);
-      #testVal2=_.rest(testVal)
-      #testVal2=testVal.join();
-      #$(domEl).find(".test").text(dataIn);
-
       chart=$(domEl).find("#container").highcharts();
       #i=-99;
       time= (new Date).getTime();
