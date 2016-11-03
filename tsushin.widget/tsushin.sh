@@ -1,6 +1,5 @@
 #!/usr/local/bin/bash
-          
-source $HOME/.bash_profile  &&
+#source $HOME/.bash_profile  &&
 netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > tsushin.db &
 process=$!
 
