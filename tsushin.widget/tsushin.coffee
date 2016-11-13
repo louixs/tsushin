@@ -22,7 +22,6 @@ render: (domEl) -> """
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <div id="container" style="width:700px; height:450px;"></div>
-<div id="test">TEST</div>
 """
   
 afterRender: (domEl) ->
@@ -147,8 +146,6 @@ update:(output,domEl) ->
       chart.series[0].addPoint([time, dataIn], true);
       chart.series[1].addPoint([time, dataOut], true);
 
-      #test
-      $(domEl).find("#test").text(dataOut) 
       console.log(err)
 # the CSS style for this widget, written using Stylus
 # (http://learnboost.github.io/stylus/)
