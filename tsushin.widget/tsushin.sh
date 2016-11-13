@@ -15,27 +15,28 @@
 # Happy coding
 ################
 
-echo $PWD/tsushin.widget
-
+####
 function getThroughput(){
-
-  netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > tsushin.db &
-
+  source $1 &&
+  
+  netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > $2/tsushin.db &
   process=$!
   sleep 1.5
-  pkill -P $process          
-  in=$(cat tsushin.db | awk '{print $1}')
-  out=$(cat tsushin.db | awk '{print $2}')
+  pkill -P $process
+
+  in=$(cat $2/tsushin.db | awk '{print $1}')
+  out=$(cat $2/tsushin.db | awk '{print $2}')
 
   echo $in $out
 }
+####
 
-
-#source path_to_your_bash_profile &&
-if [ -e $PWD/.bash_profile ]; then
-  source $PWD/.bash_profile &&
-  getThroughput
+####
+# If you have your own .bash_profile,
+# edit if condition below to please include your .bash_profile path instead 
+####
+if [ ! -e $PWD/.bash_profile ]; then
+  getThroughput "$PWD/tsushin.widget/.bash_profile" "$PWD/tsushin.widget"
 else
-  source $PWD/tsushin.widget/.bash_profile  &&
-  getThroughput
+  getThroughput "$PWD/.bash_profile" "$PWD"
 fi

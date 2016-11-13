@@ -3,13 +3,16 @@
 # Heavily inspired by Dion Munk's work network-throughput http://tracesof.net/uebersicht-widgets/#ubersicht-network-throughput
 # please note it assumes that .bash_profile exists in current user's home directory
 
-command: """
-  source .bash_profile  &&
- ./tsushin.sh
+command: """ 
+ if [ ! -e tsushin.sh ]; then
+   $PWD/tsushin.widget/tsushin.sh
+ else
+  $PWD/tsushin.sh
+ fi
 """
 
 # The refresh frequency in milliseconds
-refreshFrequency: 1700
+refreshFrequency: 2000
 
 # Render gets called after the shell command has executed. The command's output
 # is passed in as a string. Whatever it returns will get rendered as HTML.
@@ -19,6 +22,7 @@ render: (domEl) -> """
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <div id="container" style="width:700px; height:450px;"></div>
+<div id="test">TEST</div>
 """
   
 afterRender: (domEl) ->
@@ -123,17 +127,29 @@ update:(output,domEl) ->
   #How to dynamically update data for highcharts/stock
   #http://stackoverflow.com/questions/16061032/highcharts-series-data-array   #http://stackoverflow.com/questions/13049977/how-can-i-get-access-to-a-highcharts-chart-through-a-dom-container
   #http://api.highcharts.com/highstock/Series.addPoint()
-   @run './tsushin.sh', (err, output) ->
+   @run '''
+    if [ ! -e tsushin.sh ]; then
+      $PWD/tsushin.widget/tsushin.sh
+    else
+      $PWD/tsushin.sh
+    fi   
+   ''', (err, output) ->
+
       data=output.split(" ");
       dataIn = parseFloat(data[0]);
       dataOut = parseFloat(data[1]);
+      console.log(dataIn)
+      console.log(dataOut)
       chart=$(domEl).find("#container").highcharts();
       #i=-99;
       time= (new Date).getTime();
       #timeData = time + i * 10000;
       chart.series[0].addPoint([time, dataIn], true);
       chart.series[1].addPoint([time, dataOut], true);
-    
+
+      #test
+      $(domEl).find("#test").text(dataOut) 
+      console.log(err)
 # the CSS style for this widget, written using Stylus
 # (http://learnboost.github.io/stylus/)
 style: """
