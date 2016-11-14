@@ -1,6 +1,8 @@
 # tsushin (通信)
 Übersicht widget : Dynamically updating line chart that shows total up and down data being transferred to your Mac in kB. Heavily inspired by the work of Dion Munk -  network-throughput
 
+Tsushin means communication in Japanese for those who have been wondering.
+
 ## How to use:
 Just copy tsushin.widget folder to your Widgets Folder. _Please let me know if you get error that says .bash_profile does not exists._
 
