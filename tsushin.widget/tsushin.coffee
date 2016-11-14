@@ -3,12 +3,13 @@
 # Heavily inspired by Dion Munk's work network-throughput http://tracesof.net/uebersicht-widgets/#ubersicht-network-throughput
 # please note it assumes that .bash_profile exists in current user's home directory
 
-command: """ 
- if [ ! -e tsushin.sh ]; then
-   $PWD/tsushin.widget/tsushin.sh
- else
-  $PWD/tsushin.sh
- fi
+command: """
+
+if [ ! -e tsushin.sh ]; then
+  "$PWD/tsushin.widget/tsushin.sh"
+else
+  "$PWD/tsushin.sh"
+fi
 """
 
 # The refresh frequency in milliseconds
@@ -126,12 +127,12 @@ update:(output,domEl) ->
   #How to dynamically update data for highcharts/stock
   #http://stackoverflow.com/questions/16061032/highcharts-series-data-array   #http://stackoverflow.com/questions/13049977/how-can-i-get-access-to-a-highcharts-chart-through-a-dom-container
   #http://api.highcharts.com/highstock/Series.addPoint()
-   @run '''
+  @run '''
     if [ ! -e tsushin.sh ]; then
-      $PWD/tsushin.widget/tsushin.sh
+      "$PWD/tsushin.widget/tsushin.sh"
     else
-      $PWD/tsushin.sh
-    fi   
+      "$PWD/tsushin.sh"
+    fi
    ''', (err, output) ->
 
       data=output.split(" ");
@@ -161,3 +162,4 @@ style: """
   #container
     -webkit-backdrop-filter: blur(10px)
 """
+
