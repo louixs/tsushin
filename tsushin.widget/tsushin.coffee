@@ -4,7 +4,6 @@
 # please note it assumes that .bash_profile exists in current user's home directory
 
 command: """
-
 if [ ! -e tsushin.sh ]; then
   "$PWD/tsushin.widget/tsushin.sh"
 else
@@ -22,7 +21,7 @@ refreshFrequency: 2000
 render: (domEl) -> """
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:700px; height:450px;"></div>
+<div id="container" style="width:400px; height:250px;"></div>
 """
   
 afterRender: (domEl) ->
@@ -154,8 +153,8 @@ style: """
   color: #7eFFFF
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
   font-weight: 100
-  top: 10.6%
-  left: 20%
+  top: 5.6%
+  left: 5%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 12px
   white-space: pre

@@ -5,6 +5,14 @@ Tsushin means communication in Japanese for those who have been wondering.
 
 ## How to use:
 Just copy tsushin.widget folder to your Widgets Folder. _Please let me know if you get error that says .bash_profile does not exists._
+To move the widget around modify the numbers in the style section in the tsushin.coffee file:
+```
+top: 10.6%
+left: 10%
+```
+
+To change the size of the chart area, modify the values of width and heights in the following code block in the `render` section:
+`<div id="container" style="width:400px; height:250px;"></div>`
 
 ## How to read the graph:
 Yellow line indicates the total amount of uploaded data at the given time.
