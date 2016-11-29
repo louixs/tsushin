@@ -150,11 +150,17 @@ update:(output,domEl) ->
 # the CSS style for this widget, written using Stylus
 # (http://learnboost.github.io/stylus/)
 style: """
+  @font-face
+    font-family: 'hack'
+    src: url('assets/hack.ttf')
+  // https://css-tricks.com/snippets/css/using-font-face/
+  // how to use font available in directory
+
   color: #7eFFFF
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
   font-weight: 100
-  top: 5.6%
-  left: 5%
+  top: 65%
+  left: 2%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 12px
   white-space: pre
