@@ -20,7 +20,7 @@ refreshFrequency: 2000
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:400px; height:250px;">Loading ...</div>
+<div id="container" style="width:250px; height:30px;">Loading ...</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 """
@@ -30,8 +30,9 @@ afterRender: (domEl) ->
   $(domEl).find('#container').highcharts('StockChart'
     colors: ['#7eFFFF', '#7eFFFF']
     chart:   
-      marginRight: 5
-      #marginBottom: 20
+      marginRight: 10
+      marginTop: 2
+      marginBottom: 0
       animation: Highcharts.svg
          
       backgroundColor: null
@@ -72,21 +73,21 @@ afterRender: (domEl) ->
       enabled: false
       style:
         color: '#7eFFFF'
-        fontSize: '11px'
+        fontSize: '5px'
         fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Melno'
     xAxis:
       type: 'datetime'
-      #minTickInterval: 10
-      #min: 90
-      tickPixelInterval: 100
-      minRange: 15 * 24
+      minTickInterval: 1
+      #min: 0
+      tickPixelInterval: 1
+      minRange: 10
       labels:
-        enabled: true
+        enabled: false
         style: color: '#7eFFFF'
       gridLineColor: null
-      lineWidth: 0
+      lineWidth: 0.5
       minorGridLineWidth: 0
-      minorTickLenght: 0
+      minorTickLenght: 0.5
       tickLength: 0
       xlineColor: 'transparent'
 
@@ -94,28 +95,36 @@ afterRender: (domEl) ->
       title:
         text: null
         style: color: '#7eFFFF'
+      labels:
+        style:
+          fontSize:'5px'                
+        aligh: 'left'
+      #min: 0
+      #softMin: 10
+      stackLabels: true
       plotLines:[{
         value: 0
-        width: 0.5
+        width: 0.4
         color: '#7eFFFF'
       }]
       labels:
         style: color: '#7eFFFF'
       gridLineColor: null
     legend:
-      enabled: true
+      enabled: false
       verticalAlign: 'top'
      # align: 'top'
       floating: true
       
     series: [ {
       name: 'Down (kB)'
-      lineWidth: 1
+      lineWidth: 0.5
+      color: '#7eFFFF'
       data: []
       },
       {
        name: "Up (kB)"
-       lineWidth:1
+       lineWidth: 0.5
        color:"#ffff00"
        data:[]
         }]
@@ -161,10 +170,10 @@ style: """
   color: #7eFFFF
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
   font-weight: 100
-  top: 65%
-  left: 2%
+  top: 90%
+  left: 40%
   text-shadow: 0 0 1px rgba(#000, 0.5)
-  font-size: 12px
+  font-size: 5px
   white-space: pre
   #container
     -webkit-backdrop-filter: blur(10px)
