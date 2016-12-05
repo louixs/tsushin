@@ -20,7 +20,7 @@ refreshFrequency: 2000
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:250px; height:30px;">Loading ...</div>
+<div id="container" style="width:200px; height:35px;">Loading ...</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 """
@@ -30,8 +30,8 @@ afterRender: (domEl) ->
   $(domEl).find('#container').highcharts('StockChart'
     colors: ['#7eFFFF', '#7eFFFF']
     chart:   
-      marginRight: 10
-      marginTop: 2
+      marginRight: 1
+      marginTop: 0
       marginBottom: 0
       animation: Highcharts.svg
          
@@ -39,7 +39,7 @@ afterRender: (domEl) ->
       style:
         color: '#7eFFFF'
         fontFamily:'hack,  Monaco, Melno, Courier, Helvetica Neue, Osaka'
-        fontSize: '12px'
+        fontSize: '5px'
     navigator:
       enabled: false
     rangeSelector:
@@ -94,28 +94,31 @@ afterRender: (domEl) ->
     yAxis:
       title:
         text: null
-        style: color: '#7eFFFF'
-      labels:
-        style:
-          fontSize:'5px'                
-        aligh: 'left'
+        style: color: '#7eFFFF'    
       #min: 0
       #softMin: 10
-      stackLabels: true
       plotLines:[{
         value: 0
         width: 0.4
         color: '#7eFFFF'
       }]
+      
       labels:
-        style: color: '#7eFFFF'
+        enabled: false
+        color: '#7eFFFF'
+        fontSize:'5px'                
+        padding: 1
+        stackLabels: true
+        reserveSpace: false
+        
       gridLineColor: null
+
     legend:
       enabled: false
       verticalAlign: 'top'
      # align: 'top'
       floating: true
-      
+      y: 2
     series: [ {
       name: 'Down (kB)'
       lineWidth: 0.5
