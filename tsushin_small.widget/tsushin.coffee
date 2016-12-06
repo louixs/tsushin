@@ -20,8 +20,7 @@ refreshFrequency: 2000
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:200px; height:70px;">Loading ...</div>
-
+<div id="container" style="width:200px; height:50px;">Loading ...</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 """
   
@@ -31,7 +30,7 @@ afterRender: (domEl) ->
     chart:   
       marginRight: 1
       marginTop: 1
-      #marginBottom: 1
+      marginBottom: 0
       animation: Highcharts.svg
          
       backgroundColor: null
@@ -187,7 +186,7 @@ style: """
   color: #7eFFFF
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
   font-weight: 100
-  top: 90%
+  top: 93%
   left: 0%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 5px
