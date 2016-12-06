@@ -186,7 +186,7 @@ style: """
   color: #7eFFFF
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
   font-weight: 100
-  top: 93%
+  top: 92%
   left: 0%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 5px
