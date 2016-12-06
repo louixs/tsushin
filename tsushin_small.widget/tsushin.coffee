@@ -5,7 +5,7 @@
 
 command: """
 if [ ! -e tsushin.sh ]; then
-  "$PWD/tsushin.widget/tsushin.sh"
+  "$PWD/tsushin_small.widget/tsushin.sh"
 else
   "$PWD/tsushin.sh"
 fi
@@ -20,19 +20,18 @@ refreshFrequency: 2000
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:200px; height:35px;">Loading ...</div>
+<div id="container" style="width:200px; height:70px;">Loading ...</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 """
   
-afterRender: (domEl) ->
-  
+afterRender: (domEl) ->  
   $(domEl).find('#container').highcharts('StockChart'
     colors: ['#7eFFFF', '#7eFFFF']
     chart:   
       marginRight: 1
-      marginTop: 0
-      marginBottom: 0
+      marginTop: 1
+      #marginBottom: 1
       animation: Highcharts.svg
          
       backgroundColor: null
@@ -56,8 +55,7 @@ afterRender: (domEl) ->
         },{
         type: 'all'
         text: 'All'
-        }
-        ]
+        }]
       enabled: false
       inputEnabled: false
       selected:0
@@ -75,50 +73,65 @@ afterRender: (domEl) ->
         color: '#7eFFFF'
         fontSize: '5px'
         fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Melno'
+
     xAxis:
       type: 'datetime'
-      minTickInterval: 1
-      #min: 0
-      tickPixelInterval: 1
-      minRange: 10
+      dateTimeLabelFormats:
+        hour: '%I :%p'
+        minute: '%I:%M %p'
+      #minTickInterval: 600
+      #min: 90
+        tickPixelInterval: 90
+      minRange: 15*24
       labels:
-        enabled: false
-        style: color: '#7eFFFF'
+        enabled: true
+        style:
+          color: '#7eFFFF'
+          fontSize: '8px'
       gridLineColor: null
-      lineWidth: 0.5
+      lineWidth: 0
       minorGridLineWidth: 0
-      minorTickLenght: 0.5
+      minorTickLenght: 0
       tickLength: 0
       xlineColor: 'transparent'
-
+# ==================================
+# Y AXIS!
+# 
     yAxis:
+      offset: -5
       title:
         text: null
-        style: color: '#7eFFFF'    
-      #min: 0
-      #softMin: 10
+        style: color: '#7eFFFF'
       plotLines:[{
         value: 0
-        width: 0.4
+        width: 0.5
         color: '#7eFFFF'
       }]
-      
       labels:
-        enabled: false
-        color: '#7eFFFF'
-        fontSize:'5px'                
-        padding: 1
-        stackLabels: true
-        reserveSpace: false
-        
+        style:
+          color: '#7eFFFF'
+          fontSize: '8px'
+        y: 7
+
+      #tickPosition:"inside"      
+      #padding: 0
+      #stackLabels: true
+      #reserveSpace: false
+      showFirstLabel: false
+      showLastLabel: true
+                
       gridLineColor: null
 
-    legend:
-      enabled: false
-      verticalAlign: 'top'
-     # align: 'top'
-      floating: true
-      y: 2
+      legend:
+        enabled: false
+        verticalAlign: 'top'
+        # align: 'top'
+        floating: true
+
+      gridLineColor: null
+
+# ===================
+# data !! 
     series: [ {
       name: 'Down (kB)'
       lineWidth: 0.5
@@ -142,7 +155,7 @@ update:(output,domEl) ->
   #http://api.highcharts.com/highstock/Series.addPoint()
   @run '''
     if [ ! -e tsushin.sh ]; then
-      "$PWD/tsushin.widget/tsushin.sh"
+      "$PWD/tsushin_small.widget/tsushin.sh"
     else
       "$PWD/tsushin.sh"
     fi
@@ -161,6 +174,7 @@ update:(output,domEl) ->
       chart.series[1].addPoint([time, dataOut], true);
 
       console.log(err)
+      
 # the CSS style for this widget, written using Stylus
 # (http://learnboost.github.io/stylus/)
 style: """
@@ -174,11 +188,10 @@ style: """
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
   font-weight: 100
   top: 90%
-  left: 40%
+  left: 0%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 5px
   white-space: pre
   #container
     -webkit-backdrop-filter: blur(10px)
 """
-

@@ -28,7 +28,7 @@ function getThroughput(){
 
 #### the code below handles cases where a user might have copied files of widget to a non-default widget folder
 if [ ! -e "$PWD/tsushin.sh" ]; then
-  getThroughput "$PWD/tsushin.widget"
+  getThroughput "$PWD/tsushin_small.widget"
 else
   getThroughput "$PWD"
 fi
