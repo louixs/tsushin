@@ -30,7 +30,7 @@ afterRender: (domEl) ->
     chart:   
       marginRight: 1
       marginTop: 1
-      marginBottom: 0
+      marginBottom: 8
       animation: Highcharts.svg
          
       backgroundColor: null
@@ -73,6 +73,9 @@ afterRender: (domEl) ->
         fontSize: '5px'
         fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Melno'
 
+#==============================
+# X - AXIS!
+# =====================
     xAxis:
       type: 'datetime'
       dateTimeLabelFormats:
@@ -84,6 +87,8 @@ afterRender: (domEl) ->
       minRange: 15*24
       labels:
         enabled: true
+        #padding: -5
+        y: 8
         style:
           color: '#7eFFFF'
           fontSize: '8px'
@@ -95,7 +100,6 @@ afterRender: (domEl) ->
       xlineColor: 'transparent'
 # ==================================
 # Y AXIS!
-# 
     yAxis:
       offset: -5
       title:
