@@ -21,4 +21,9 @@ Blue line then is for the total of downloaded data at the given time.
 ## Note:
 This should work out of box just by placing tsushin.widget folder in your Widgets Folder. However if you entcounter any error, please let me know.
 
+## Update:
+Thanks to the feedbacks from @Porco-Rosso, there is now a smaller version in the tsuchin_small.widget. It can for instance be placed in the bottom or top of your screen among other widgets to make a visual status bar. 
+
+![alt text](screenshot_small.png "Tsushin small")
+
 Happy coding
