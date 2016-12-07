@@ -3,6 +3,8 @@
 
  Of course you might want to know what tsushin means in case you haven't studied Japanese before, it means communication.
 
+![alt text](screenshot.png "Tsushin")
+
 ## How to use:
 Just copy tsushin.widget folder to your Widgets Folder. _Please let me know if you get error that says .bash_profile does not exists._
 To move the widget around modify the numbers in the style section in the tsushin.coffee file:
