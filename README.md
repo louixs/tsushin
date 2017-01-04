@@ -5,8 +5,9 @@ Regular version - tsushin.widget (400px x 250px)
 ![alt text](screenshot.png "Tsushin")
 
 Smaller version - tsushin_small.widget (200px x 50px) 
+
 ![alt text](screenshot_small.png "Tsushin small")
-(Thanks to the feedbacks from [Porco-Rosso](https://github.com/Porco-Rosso))
+(Thanks to the feedback from [Porco-Rosso](https://github.com/Porco-Rosso))
 
 ## How to use:
 Just copy tsushin.widget folder to your Widgets Folder. _Please let me know if you get error that says .bash_profile does not exists._
