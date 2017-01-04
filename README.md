@@ -1,9 +1,12 @@
 # tsushin (通信)
 Übersicht widget : Dynamically updating line chart that shows total up and down data being transferred to your Mac in kB. Heavily inspired by the work of Dion Munk -  network-throughput
 
- Of course you might want to know what tsushin means in case you haven't studied Japanese before, it means communication.
-
+Regular version - tsushin.widget (400px x 250px)
 ![alt text](screenshot.png "Tsushin")
+
+Smaller version - tsushin_small.widget (200px x 50px) 
+![alt text](screenshot_small.png "Tsushin small")
+(Thanks to the feedbacks from [Porco-Rosso](https://github.com/Porco-Rosso))
 
 ## How to use:
 Just copy tsushin.widget folder to your Widgets Folder. _Please let me know if you get error that says .bash_profile does not exists._
@@ -13,7 +16,10 @@ top: 10.6%
 left: 10%
 ```
 
-To change the size of the chart area, modify the values of width and heights in the following code block in the `render` section:
+## Regular and smaller versions included
+There are two versions included. The regular version, tsushin.widget, has 400 px width and 250 px height by default. The smaller version has 200 px width and 50 px height by default. When scaling down the regular version below certain size it did not scale down properly. Smaller version has also adjusted font size and line width to match its scale.
+
+You can still change the size of the chart area to your liking. To do so, modify the values of width and heights in the following code block in the `render` section:
 `<div id="container" style="width:400px; height:250px;"></div>`
 
 ## How to read the graph:
@@ -23,9 +29,6 @@ Blue line then is for the total of downloaded data at the given time.
 ## Note:
 This should work out of box just by placing tsushin.widget folder in your Widgets Folder. However if you entcounter any error, please let me know.
 
-## Update:
-Thanks to the feedbacks from @Porco-Rosso, there is now a smaller version in the tsuchin_small.widget. It can for instance be placed in the bottom or top of your screen among other widgets to make a visual status bar. 
-
-![alt text](screenshot_small.png "Tsushin small")
+In case you want to know what tsushin means, it means communication in Japanese.
 
 Happy coding

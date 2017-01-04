@@ -21,8 +21,6 @@ refreshFrequency: 2000
 render: (domEl) -> """
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <div id="container" style="width:400px; height:250px;">Loading ...</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 """
   
 afterRender: (domEl) ->
@@ -37,7 +35,7 @@ afterRender: (domEl) ->
       backgroundColor: null
       style:
         color: '#7eFFFF'
-        fontFamily:'hack,  Monaco, Melno, Courier, Helvetica Neue, Osaka'
+        fontFamily:'hack, Andale Mono, Melno, Monaco, Courier, Helvetica Neue, Osaka'
         fontSize: '12px'
     navigator:
       enabled: false
@@ -148,18 +146,15 @@ update:(output,domEl) ->
       chart.series[0].addPoint([time, dataIn], true);
       chart.series[1].addPoint([time, dataOut], true);
 
-      console.log(err)
 # the CSS style for this widget, written using Stylus
 # (http://learnboost.github.io/stylus/)
 style: """
   @font-face
     font-family: 'hack'
     src: url('assets/hack.ttf')
-  // https://css-tricks.com/snippets/css/using-font-face/
-  // how to use font available in directory
 
   color: #7eFFFF
-  font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
+  font-family: hack, Andale Mono, Melno, Monaco, Courier, Helvetica Neue, Osaka
   font-weight: 100
   top: 65%
   left: 2%

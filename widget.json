@@ -1,6 +1,6 @@
 {
-  "name": "tshushin",
-  "description": "A graph that shows total up and down data being transferred to your Mac. Heavily inspired by the work of Dion Munk - network-throughput",
+  "name": "tsushin",
+  "description": "A graph that shows total up and down data being transferred to your Mac. Heavily inspired by the work of Dion Munk - network-throughput. This widget now includes a smaller version in tsushin_small.widget (Width 200 Height 50).",
   "author": "Ryuei Sasaki",
   "email": "ryuei.sasaki@gmail.com"
 }
