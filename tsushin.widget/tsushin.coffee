@@ -35,7 +35,7 @@ afterRender: (domEl) ->
       backgroundColor: null
       style:
         color: '#7eFFFF'
-        fontFamily:'hack, Andale Mono, Melno, Monaco, Courier, Helvetica Neue, Osaka'
+        fontFamily:'hack, Andale Mono, Menlo, Monaco, Courier, Helvetica Neue, Osaka'
         fontSize: '12px'
     navigator:
       enabled: false
@@ -71,7 +71,7 @@ afterRender: (domEl) ->
       style:
         color: '#7eFFFF'
         fontSize: '11px'
-        fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Melno'
+        fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Menlo'
     xAxis:
       type: 'datetime'
       #minTickInterval: 10
@@ -154,7 +154,7 @@ style: """
     src: url('assets/hack.ttf')
 
   color: #7eFFFF
-  font-family: hack, Andale Mono, Melno, Monaco, Courier, Helvetica Neue, Osaka
+  font-family: hack, Andale Mono, Menlo, Monaco, Courier, Helvetica Neue, Osaka
   font-weight: 100
   top: 65%
   left: 2%
