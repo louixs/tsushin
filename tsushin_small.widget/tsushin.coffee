@@ -31,7 +31,7 @@ afterRender: (domEl) ->
       backgroundColor: null
       style:
         color: 'rgba(126, 255, 255, 0.50)'
-        fontFamily:'hack, Andale Mono, Melno, Monaco, Courier, Helvetica Neue, Osaka'
+        fontFamily:'hack, Andale Mono, Menlo, Monaco, Courier, Helvetica Neue, Osaka'
         fontSize: '5px'
     navigator:
       enabled: false
@@ -66,7 +66,7 @@ afterRender: (domEl) ->
       style:
         color: 'rgba(126, 255, 255, 0.50)'
         fontSize: '5px'
-        fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Melno'
+        fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Menlo'
 #========================
     xAxis:
       type: 'datetime'
@@ -178,7 +178,7 @@ style: """
     src: url('assets/hack.ttf')
 
   color: #7eFFFF
-  font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
+  font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Menlo
   font-weight: 100
   top: 92%
   left: 0%
