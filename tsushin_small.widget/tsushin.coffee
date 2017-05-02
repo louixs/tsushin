@@ -21,7 +21,7 @@ render: (domEl) -> """
   
 afterRender: (domEl) ->  
   $(domEl).find('#container').highcharts('StockChart'
-    colors: ['#7eFFFF', '#7eFFFF']
+    colors: ['#6fc3df', '#6fc3df']
     chart:   
       marginRight: 1
       marginTop: 1
@@ -108,7 +108,7 @@ afterRender: (domEl) ->
       plotLines:[{
         value: 0
         width: 0.5
-        color: '#7eFFFF'
+        color: '#6fc3df'
       }]
       labels:
         style:
@@ -136,13 +136,13 @@ afterRender: (domEl) ->
     series: [ {
       name: 'Down (kB)'
       lineWidth: 0.5
-      color: '#7eFFFF'
+      color: '#6fc3df'
       data: []
       },
       {
        name: "Up (kB)"
        lineWidth: 0.5
-       color:"#ffff00"
+       color:"#ffe64d"
        data:[]
         }]
       
@@ -177,8 +177,12 @@ style: """
     font-family: 'hack'
     src: url('assets/hack.ttf')
 
-  color: #7eFFFF
+  color: #6fc3df
+<<<<<<< Updated upstream
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Menlo
+=======
+  font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
+>>>>>>> Stashed changes
   font-weight: 100
   top: 92%
   left: 0%

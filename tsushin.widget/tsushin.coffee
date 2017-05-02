@@ -19,14 +19,16 @@ refreshFrequency: 2000
 #
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
+
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  
 <div id="container" style="width:400px; height:250px;">Loading ...</div>
 """
   
 afterRender: (domEl) ->
   
   $(domEl).find('#container').highcharts('StockChart'
-    colors: ['#7eFFFF', '#7eFFFF']
+    colors: ['#6fc3df', '#6fc3df']
     chart:   
       marginRight: 5
       #marginBottom: 20
@@ -34,7 +36,7 @@ afterRender: (domEl) ->
          
       backgroundColor: null
       style:
-        color: '#7eFFFF'
+        color: '#6fc3df'
         fontFamily:'hack, Andale Mono, Menlo, Monaco, Courier, Helvetica Neue, Osaka'
         fontSize: '12px'
     navigator:
@@ -69,7 +71,7 @@ afterRender: (domEl) ->
       #text: 'Network througput (bytes)'
       enabled: false
       style:
-        color: '#7eFFFF'
+        color: '#6fc3df'
         fontSize: '11px'
         fontFamily:'hack, Courier, Helvetica Neue, Osaka, Monaco, Menlo'
     xAxis:
@@ -80,7 +82,7 @@ afterRender: (domEl) ->
       minRange: 15 * 24
       labels:
         enabled: true
-        style: color: '#7eFFFF'
+        style: color: '#6fc3df'
       gridLineColor: null
       lineWidth: 0
       minorGridLineWidth: 0
@@ -91,14 +93,14 @@ afterRender: (domEl) ->
     yAxis:
       title:
         text: null
-        style: color: '#7eFFFF'
+        style: color: '#6fc3df'
       plotLines:[{
         value: 0
         width: 0.5
-        color: '#7eFFFF'
+        color: '#6fc3df'
       }]
       labels:
-        style: color: '#7eFFFF'
+        style: color: '#6fc3df'
       gridLineColor: null
     legend:
       enabled: true
@@ -114,7 +116,7 @@ afterRender: (domEl) ->
       {
        name: "Up (kB)"
        lineWidth:1
-       color:"#ffff00"
+       color:"#ffe64d"
        data:[]
         }]
       
@@ -152,12 +154,11 @@ style: """
   @font-face
     font-family: 'hack'
     src: url('assets/hack.ttf')
-
-  color: #7eFFFF
+  color:#6fc3df
   font-family: hack, Andale Mono, Menlo, Monaco, Courier, Helvetica Neue, Osaka
   font-weight: 100
   top: 65%
-  left: 2%
+  left: 30%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 12px
   white-space: pre

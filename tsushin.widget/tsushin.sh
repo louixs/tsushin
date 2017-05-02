@@ -12,11 +12,11 @@ whereNetstat=$(which netstat)
 
 foundPaths="${whereCat///cat}:${whereAwk///awk}:${whereNetstat///netstat}"
 ####
-function getThroughput(){
+function getThroughput(){  
   export PATH="$foundPaths" &&
-  netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > "$1/tsushin.db" &
+  netstat -iw 1 | head -n3 | tail -n1 | awk '{print $3 " " $6}' > "$1/tsushin.db" &  
   process=$!
-  sleep 1.5
+  sleep 1.5  
   pkill -P $process
   
   in=$(cat "$1/tsushin.db" | awk '{print $1}')
