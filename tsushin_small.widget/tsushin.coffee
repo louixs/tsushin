@@ -178,11 +178,7 @@ style: """
     src: url('assets/hack.ttf')
 
   color: #6fc3df
-<<<<<<< Updated upstream
   font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Menlo
-=======
-  font-family: hack, Courier, Helvetica Neue, Osaka, Monaco, Melno
->>>>>>> Stashed changes
   font-weight: 100
   top: 92%
   left: 0%
