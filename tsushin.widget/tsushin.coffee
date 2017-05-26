@@ -19,13 +19,16 @@ refreshFrequency: 2000
 #
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
-
-<script src="https://code.highcharts.com/stock/highstock.js"></script>
-  
+<script src="https://code.highcharts.com/stock/highstock.js"></script>  
 <div id="container" style="width:400px; height:250px;">Loading ...</div>
 """
   
 afterRender: (domEl) ->
+    Highcharts.setOptions({
+    global: {
+      useUTC: false # UTC is set by default, disabling it triggers highcharts to pick up browser's local time
+    }
+  })
   
   $(domEl).find('#container').highcharts('StockChart'
     colors: ['#6fc3df', '#6fc3df']
@@ -135,12 +138,9 @@ update:(output,domEl) ->
       "$PWD/tsushin.sh"
     fi
    ''', (err, output) ->
-
       data=output.split(" ");
       dataIn = parseFloat(data[0]);
       dataOut = parseFloat(data[1]);
-      console.log(dataIn)
-      console.log(dataOut)
       chart=$(domEl).find("#container").highcharts();
       #i=-99;
       time= (new Date).getTime();
@@ -157,7 +157,7 @@ style: """
   color:#6fc3df
   font-family: hack, Andale Mono, Menlo, Monaco, Courier, Helvetica Neue, Osaka
   font-weight: 100
-  top: 65%
+  top: 63%
   left: 30%
   text-shadow: 0 0 1px rgba(#000, 0.5)
   font-size: 12px
