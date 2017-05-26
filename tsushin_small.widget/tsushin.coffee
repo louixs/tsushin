@@ -16,10 +16,16 @@ refreshFrequency: 2000
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:200px; height:50px;">Loading...</div>
+<div id="container" style="width:200px; height:50px;">Loading...</div>    
 """
   
-afterRender: (domEl) ->  
+afterRender: (domEl) ->
+  Highcharts.setOptions({
+    global: {
+      useUTC: false # UTC is set by default, disabling it triggers highcharts to pick up browser's local time
+    }
+  })
+  
   $(domEl).find('#container').highcharts('StockChart'
     colors: ['#6fc3df', '#6fc3df']
     chart:   
@@ -27,7 +33,7 @@ afterRender: (domEl) ->
       marginTop: 1
       marginBottom: 8
       animation: Highcharts.svg
-         
+      useUTC: false
       backgroundColor: null
       style:
         color: 'rgba(126, 255, 255, 0.50)'
@@ -73,8 +79,9 @@ afterRender: (domEl) ->
       dateTimeLabelFormats:
         hour: '%I :%p'
         minute: '%I:%M %p'
-      #minTickInterval: 600
-      #min: 90
+        useUTC: false
+        #minTickInterval: 600
+        #min: 90
         tickPixelInterval: 90
       minRange: 15*24
       labels:
@@ -148,7 +155,7 @@ afterRender: (domEl) ->
       
     credits:
       enabled: false
-)
+  )
 
 update:(output,domEl) ->
   #How to dynamically update data for highcharts/stock    #http://stackoverflow.com/questions/16061032/highcharts-series-data-array  #http://stackoverflow.com/questions/13049977/how-can-i-get-access-to-a-highcharts-chart-through-a-dom-container
@@ -166,7 +173,7 @@ update:(output,domEl) ->
       dataOut = parseFloat(data[1]);
       chart=$(domEl).find("#container").highcharts();
       time= (new Date).getTime();
-      #timeData = time + i * 10000;
+      #timeData = time + i * 10000;  
       chart.series[0].addPoint([time, dataIn], true);
       chart.series[1].addPoint([time, dataOut], true);
       
