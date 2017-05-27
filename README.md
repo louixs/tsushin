@@ -2,18 +2,22 @@
 Übersicht widget : Dynamically updating line chart that shows total up and down data being transferred to your Mac in kB. Heavily inspired by the work of Dion Munk -  network-throughput
 
 Regular version - tsushin.widget (400px x 250px)
+
 ![alt text](screenshot.png "Tsushin")
 
-Smaller version - tsushin_small.widget (200px x 50px) 
+Smaller version - tsushin_small.widget (200px x 50px)
+
 ![alt text](screenshot_small.png "Tsushin small")
 (Thanks to the feedback from [Porco-Rosso](https://github.com/Porco-Rosso))
 
 ----
 In action (fast-forwarded):
 Regular version - tsushin.widget
+
 ![alt text](tsushin.gif "Tsushin")
 
 Smaller version - tsushin_small.widget
+
 ![alt text](tsushin_small.gif "Tsushin small")
 
 
