@@ -28,8 +28,11 @@ Yellow line indicates the total amount of uploaded data at the given time.
 Blue line then is for the total of downloaded data at the given time.
 
 ## Note:
-This should work out of box just by placing tsushin.widget folder in your Widgets Folder. However if you entcounter any error, please let me know.
+This should work out of box just by placing tsushin.widget or tsushin_small.widget folder in your Widgets Folder. However if you entcounter any error, please let me know.
 
 In case you want to know what tsushin means, it means communication in Japanese.
+
+## Todo:
+- review README.md and improve
 
 Happy coding
