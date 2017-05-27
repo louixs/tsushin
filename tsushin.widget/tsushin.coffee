@@ -19,24 +19,24 @@ refreshFrequency: 2000
 #
 # Change container size to change the sizing of the chart
 render: (domEl) -> """
-<script src="https://code.highcharts.com/stock/highstock.js"></script>  
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
 <div id="container" style="width:400px; height:250px;">Loading ...</div>
 """
-  
+
 afterRender: (domEl) ->
-    Highcharts.setOptions({
+  Highcharts.setOptions({
     global: {
       useUTC: false # UTC is set by default, disabling it triggers highcharts to pick up browser's local time
     }
   })
-  
+
   $(domEl).find('#container').highcharts('StockChart'
     colors: ['#6fc3df', '#6fc3df']
-    chart:   
+    chart:
       marginRight: 5
       #marginBottom: 20
       animation: Highcharts.svg
-         
+
       backgroundColor: null
       style:
         color: '#6fc3df'
@@ -66,7 +66,7 @@ afterRender: (domEl) ->
       #inputEnabled: false
       #buttonTheme: visibility: 'hidden'
       #labelStyle: visibility: 'hidden'
-      
+
     scrollbar:
       enabled:false
 
@@ -110,7 +110,7 @@ afterRender: (domEl) ->
       verticalAlign: 'top'
      # align: 'top'
       floating: true
-      
+
     series: [ {
       name: 'Down (kB)'
       lineWidth: 1
@@ -122,7 +122,7 @@ afterRender: (domEl) ->
        color:"#ffe64d"
        data:[]
         }]
-      
+
     credits:
       enabled: false
 )
@@ -165,4 +165,3 @@ style: """
   #container
     -webkit-backdrop-filter: blur(10px)
 """
-
