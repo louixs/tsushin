@@ -1,0 +1,13 @@
+{
+    "name": "tsushin",
+    "version": "0.0.1",
+    "author": "Ryuei Sasaki",
+    "description": "near real time chart for network throughput",
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.10"
+    },
+    "dependencies": {
+        "highcharts": "~5.0.12"
+    }
+}

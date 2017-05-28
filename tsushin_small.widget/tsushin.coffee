@@ -1,6 +1,7 @@
 # Tsushin widget for ubersicht
 # network throughput in kB
 # Heavily inspired by Dion Munk's work network-throughput http://tracesof.net/uebersicht-widgets/#ubersicht-network-throughput
+Highcharts = require('highcharts/highstock')
 
 command: """
 if [ ! -e tsushin.sh ]; then
@@ -14,9 +15,10 @@ fi
 refreshFrequency: 2000
 
 # Change container size to change the sizing of the chart
+# <script src="https://code.highcharts.com/stock/highstock.js"></script>
 render: (domEl) -> """
-<script src="https://code.highcharts.com/stock/highstock.js"></script>
-<div id="container" style="width:200px; height:50px;">Loading...</div>    
+<div id="container" style="width:200px; height:50px;">Loading...</div>
+
 """
   
 afterRender: (domEl) ->
@@ -27,6 +29,7 @@ afterRender: (domEl) ->
   })
   
   $(domEl).find('#container').highcharts('StockChart'
+  #chart = Highcharts.chart("container"
     colors: ['#6fc3df', '#6fc3df']
     chart:   
       marginRight: 1
