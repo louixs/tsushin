@@ -139,7 +139,11 @@ Reinstall locally after a rebuild:
 ```text
 src/
   entries/         widget-specific defaults
-  shared/          shared TypeScript widget logic and shell sampler
+  shared/
+    widget.tsx      shared TypeScript widget logic
+    types.ts        shared type definitions
+    tsushin.sh      shell sampler
+  types/           TypeScript ambient type declarations (jsx.d.ts)
 scripts/
   build-widgets.mjs
 tsushin.widget/

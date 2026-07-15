@@ -30,6 +30,10 @@ if (!existsSync(sharedDir)) {
   throw new Error("Missing compiled shared modules. Run the TypeScript build first.");
 }
 
+if (!existsSync(samplerSource)) {
+  throw new Error(`Missing sampler source: ${samplerSource}`);
+}
+
 for (const widget of widgets) {
   if (!existsSync(widget.entryFile)) {
     throw new Error(`Missing compiled widget entry: ${widget.entryFile}`);
