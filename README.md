@@ -1,50 +1,194 @@
 # tsushin (通信)
-Übersicht widget : Dynamically updating line chart that shows total up and down data being transferred to your Mac in kB. Heavily inspired by the work of Dion Munk -  network-throughput
 
-Regular version - tsushin.widget (400px x 250px)
+`tsushin` is an [Übersicht](https://tracesof.net/uebersicht/) widget that shows live network throughput on macOS.
 
-![alt text](screenshot.png "Tsushin")
+It samples the active network interface, calculates download and upload throughput in `kB/s`, and renders a bounded rolling chart so the graph stays responsive over long runtimes.
 
-Smaller version - tsushin_small.widget (200px x 50px)
+Regular widget:
 
-![alt text](screenshot_small.png "Tsushin small")
-(Thanks to the feedback from [Porco-Rosso](https://github.com/Porco-Rosso))
+![Tsushin regular](screenshot.png)
 
-----
-In action (fast-forwarded):
-Regular version - tsushin.widget
+Small widget:
 
-![alt text](tsushin.gif "Tsushin")
+![Tsushin small](screenshot_small.png)
 
-Smaller version - tsushin_small.widget
+Animated previews:
 
-![alt text](tsushin_small.gif "Tsushin small")
+![Tsushin regular animation](tsushin.gif)
 
+![Tsushin small animation](tsushin_small.gif)
 
-## How to use:
-Just copy tsushin.widget folder to your Widgets Folder. _Please let me know if you get error that says .bash_profile does not exists._
-To move the widget around modify the numbers in the style section in the tsushin.coffee file:
+## What is included
+
+- `tsushin.widget`: regular version, default size `400 x 250`
+- `tsushin_small.widget`: compact version, default size `200 x 50`
+- `install.sh`: installs one or both generated widgets into your local Übersicht widgets folder
+- `src/`: TypeScript source used to generate the shipped `.jsx` widgets
+
+## Features
+
+- Rolling 1-hour graph window
+- Automatic active-interface detection
+- Download and upload lines rendered locally with SVG
+- No external chart library or CDN dependency
+- Local `config.js` file for simple on-screen positioning
+- Shared TypeScript implementation for both widget sizes
+
+## Install
+
+You do not need Node.js just to use the shipped widgets. The generated widget folders are already included in the repo.
+
+From this repo:
+
+```bash
+./install.sh
 ```
-top: 10.6%
-left: 10%
+
+That installs the regular widget into the default Übersicht widgets folder if it can be detected.
+
+Other options:
+
+```bash
+./install.sh small
+./install.sh both
+./install.sh regular "$HOME/Library/Application Support/Übersicht/widgets"
 ```
 
-## Regular and smaller versions included
-There are two versions included. The regular version, tsushin.widget, has 400 px width and 250 px height by default. The smaller version has 200 px width and 50 px height by default. When scaling down the regular version below certain size it did not scale down properly. Smaller version has also adjusted font size and line width to match its scale.
+After installation, reload Übersicht or restart the app.
 
-You can still change the size of the chart area to your liking. To do so, modify the values of width and heights in the following code block in the `render` section:
-`<div id="container" style="width:400px; height:250px;"></div>`
+Typical widget location:
 
-## How to read the graph:
-Yellow line indicates the total amount of uploaded data at the given time.
-Blue line then is for the total of downloaded data at the given time.
+```text
+~/Library/Application Support/Übersicht/widgets/
+```
 
-## Note:
-This should work out of box just by placing tsushin.widget or tsushin_small.widget folder in your Widgets Folder. However if you entcounter any error, please let me know.
+## Move the widget
 
-In case you want to know what tsushin means, it means communication in Japanese.
+After installing, edit the local `config.json` inside the installed widget folder.
 
-## Todo:
-- review README.md and improve
+Regular widget:
 
-Happy coding
+```text
+~/Library/Application Support/Übersicht/widgets/tsushin.widget/config.json
+```
+
+Small widget:
+
+```text
+~/Library/Application Support/Übersicht/widgets/tsushin_small.widget/config.json
+```
+
+Example:
+
+```json
+{
+  "left": "40px",
+  "top": "80px"
+}
+```
+
+You can use pixel values or percentages.
+
+The installer preserves your local `config.json` when you reinstall updated widget files.
+
+## Read the graph
+
+- Blue line: download throughput
+- Yellow line: upload throughput
+
+The widget scales the Y axis automatically based on recent traffic.
+
+## Choose between regular and small
+
+Use `tsushin.widget` if you want axis labels, time labels, and a larger chart area.
+
+Use `tsushin_small.widget` if you want a compact status-style widget near an edge of the screen.
+
+## Develop
+
+The editable source is in `src/`. The checked-in `.widget` folders contain generated files for Übersicht.
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Build generated widget output:
+
+```bash
+npm run build
+```
+
+Type-check only:
+
+```bash
+npm run typecheck
+```
+
+Reinstall locally after a rebuild:
+
+```bash
+./install.sh regular
+./install.sh small
+./install.sh both
+```
+
+## Project layout
+
+```text
+src/
+  entries/         widget-specific defaults
+  shared/          shared TypeScript widget logic and shell sampler
+scripts/
+  build-widgets.mjs
+tsushin.widget/
+  tsushin.jsx      generated Übersicht entry
+  config.json      local position override
+  src/             generated shared runtime
+  tsushin.sh       shell sampler
+tsushin_small.widget/
+  ...
+```
+
+## Customize beyond position
+
+For size and default layout changes, edit:
+
+- `src/entries/regular.tsx`
+- `src/entries/small.tsx`
+
+Then rebuild:
+
+```bash
+npm run build
+```
+
+For shared chart behavior, edit:
+
+- `src/shared/widget.tsx`
+- `src/shared/tsushin.sh`
+
+## Package zip files
+
+To rebuild a distributable zip:
+
+```bash
+./deployReady_zip.sh tsushin.widget
+./deployReady_zip.sh tsushin_small.widget
+```
+
+## Troubleshooting
+
+If the widget does not appear:
+
+1. Make sure the widget folder exists under `~/Library/Application Support/Übersicht/widgets/`.
+2. Reload Übersicht after installing.
+3. Check that `tsushin.jsx`, `config.json`, `tsushin.sh`, and the `src/` folder are all present inside the installed widget directory.
+4. If you changed source files in this repo, run `npm run build` before reinstalling.
+
+If you want to start clean, delete the installed widget folder and run `./install.sh` again.
+
+## Notes
+
+`tsushin` means "communication" in Japanese.

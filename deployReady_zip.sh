@@ -1,27 +1,12 @@
 #!/bin/bash
 
-function fileExists(){
-  # check if the variable exists or not
-  if [ -f $1 ] && [ -n $1 ] ; then
-     return 0 # file exists
-  else
-     return 1 # file does not exist
-  fi
-}
+set -euo pipefail
 
-folder=$1
+folder=${1:?usage: ./deployReady_zip.sh <widget-folder>}
+archive="${folder}.zip"
 
-rm "$folder"/assets/*.db
-echo ".db files removed"
-rm -r "$folder"/assets/log
-echo "log files removed"
+rm -f "${folder}/tsushin.db"
+rm -rf "${folder}/log" "${folder}/assets/log"
+rm -f "${archive}"
 
-if fileExists "$folder".zip; then
-  rm "$folder".zip
-  zip -r "$folder".zip  "$folder"
-  echo "deleted existing .zip and re-zipped"
-else
-  zip -r "$folder".zip  "$folder"
-  echo "re-zipped"
-fi
-
+zip -r "${archive}" "${folder}"

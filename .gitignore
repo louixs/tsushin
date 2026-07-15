@@ -3,6 +3,8 @@
 *.log
 *.db
 log/
+node_modules/
+.build/
 
 # OS generated files #
 ######################

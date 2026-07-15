@@ -1,0 +1,11 @@
+{
+  "name": "tsushin",
+  "private": true,
+  "scripts": {
+    "build": "tsc --project tsconfig.json --outDir .build && node scripts/build-widgets.mjs",
+    "typecheck": "tsc --project tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

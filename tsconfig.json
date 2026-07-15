@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmitOnError": true,
+    "rootDir": "src",
+    "outDir": ".build",
+    "jsx": "preserve",
+    "lib": [
+      "ES2020"
+    ],
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
