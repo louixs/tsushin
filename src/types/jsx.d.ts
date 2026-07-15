@@ -3,6 +3,7 @@ interface CommonAttrs {
   style?: Record<string, string | number>;
   key?: string | number;
   children?: unknown;
+  ref?: (el: HTMLElement | null) => void;
 }
 
 interface SvgTextAttrs extends CommonAttrs {
