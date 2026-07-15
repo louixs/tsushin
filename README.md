@@ -111,19 +111,19 @@ The editable source is in `src/`. The checked-in `.widget` folders contain gener
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Build generated widget output:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Type-check only:
 
 ```bash
-npm run typecheck
+pnpm run typecheck
 ```
 
 Reinstall locally after a rebuild:
@@ -165,7 +165,7 @@ For size and default layout changes, edit:
 Then rebuild:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 For shared chart behavior, edit:
@@ -189,7 +189,7 @@ If the widget does not appear:
 1. Make sure the widget folder exists under `~/Library/Application Support/Übersicht/widgets/`.
 2. Reload Übersicht after installing.
 3. Check that `tsushin.jsx`, `config.json`, `tsushin.sh`, and the `src/` folder are all present inside the installed widget directory.
-4. If you changed source files in this repo, run `npm run build` before reinstalling.
+4. If you changed source files in this repo, run `pnpm run build` before reinstalling.
 
 If you want to start clean, delete the installed widget folder and run `./install.sh` again.
 
