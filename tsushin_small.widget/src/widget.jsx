@@ -114,7 +114,7 @@ function bindDragHandle(el, config) {
     }
     el.dataset.dragBound = "true";
     attachDragHandle(el, {
-        configPath: join(config.widgetDir, "config.json"),
+        configPath: join(config.configDir, "config.json"),
         initial: { left: config.left, top: config.top },
     });
 }

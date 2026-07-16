@@ -6,23 +6,23 @@ It samples the active network interface, calculates download and upload throughp
 
 Regular widget:
 
-![Tsushin regular](screenshot.png)
+![Tsushin regular](docs/media/screenshot.png)
 
 Small widget:
 
-![Tsushin small](screenshot_small.png)
+![Tsushin small](docs/media/screenshot_small.png)
 
 Animated previews:
 
-![Tsushin regular animation](tsushin.gif)
+![Tsushin regular animation](docs/media/tsushin.gif)
 
-![Tsushin small animation](tsushin_small.gif)
+![Tsushin small animation](docs/media/tsushin_small.gif)
 
 ## What is included
 
 - `tsushin.widget`: regular version, default size `400 x 250`
 - `tsushin_small.widget`: compact version, default size `200 x 50`
-- `install.sh`: installs one or both generated widgets into your local Übersicht widgets folder
+- `scripts/install-widgets.mjs` (via `pnpm run deploy`): installs one or both generated widgets into your local Übersicht widgets folder
 - `src/`: TypeScript source used to generate the shipped `.jsx` widgets
 
 ## Features
@@ -42,17 +42,17 @@ You do not need Node.js just to use the shipped widgets. The generated widget fo
 From this repo:
 
 ```bash
-./install.sh
+pnpm run deploy
 ```
 
 That installs the regular widget into the default Übersicht widgets folder if it can be detected.
 
-Other options:
+Other options (pnpm requires `--` before extra arguments so they are forwarded to the script instead of being parsed by pnpm itself):
 
 ```bash
-./install.sh small
-./install.sh both
-./install.sh regular "$HOME/Library/Application Support/Übersicht/widgets"
+pnpm run deploy -- small
+pnpm run deploy -- both
+pnpm run deploy -- regular "$HOME/Library/Application Support/Übersicht/widgets"
 ```
 
 After installation, reload Übersicht or restart the app.
@@ -132,9 +132,9 @@ pnpm run typecheck
 Reinstall locally after a rebuild:
 
 ```bash
-./install.sh regular
-./install.sh small
-./install.sh both
+pnpm run deploy -- regular
+pnpm run deploy -- small
+pnpm run deploy -- both
 ```
 
 ## Project layout
@@ -149,6 +149,7 @@ src/
   types/           TypeScript ambient type declarations (jsx.d.ts)
 scripts/
   build-widgets.mjs
+  install-widgets.mjs
 tsushin.widget/
   tsushin.jsx      generated Übersicht entry
   config.json      local position override
@@ -203,7 +204,7 @@ If the widget does not appear:
 3. Check that `tsushin.jsx`, `config.json`, `tsushin.sh`, and the `src/` folder are all present inside the installed widget directory.
 4. If you changed source files in this repo, run `pnpm run build` before reinstalling.
 
-If you want to start clean, delete the installed widget folder and run `./install.sh` again.
+If you want to start clean, delete the installed widget folder and run `pnpm run deploy` again.
 
 ## Notes
 

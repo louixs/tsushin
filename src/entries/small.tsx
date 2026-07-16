@@ -2,6 +2,7 @@ import type { ViewConfig } from "../shared/types";
 
 export const defaultViewConfig: ViewConfig = {
   compact: true,
+  configDir: ".",
   height: 50,
   left: "0%",
   lineWidth: 1,

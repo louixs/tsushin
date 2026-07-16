@@ -19,6 +19,7 @@ export interface CommandEvent {
 
 export interface ViewConfig {
   compact: boolean;
+  configDir: string;
   height: number;
   left: string;
   lineWidth: number;

@@ -6,6 +6,7 @@ const overrides = require("./config.json");
 const widget = createTsushinWidget({
   ...defaultViewConfig,
   ...overrides,
+  configDir: __dirname,
 });
 
 export const className = widget.className;
