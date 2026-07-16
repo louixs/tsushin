@@ -4,6 +4,8 @@
 
 It samples the active network interface, calculates download and upload throughput in `kB/s`, and renders a bounded rolling chart so the graph stays responsive over long runtimes.
 
+> This repo was overhauled in 2026 with heavy assistance from [Claude Code](https://claude.com/claude-code) — see [2026 overhaul](#2026-overhaul) below for what changed and how it was built.
+
 Regular widget:
 
 ![Tsushin regular](docs/media/screenshot.png)
@@ -205,6 +207,19 @@ If the widget does not appear:
 4. If you changed source files in this repo, run `pnpm run build` before reinstalling.
 
 If you want to start clean, delete the installed widget folder and run `pnpm run deploy` again.
+
+## 2026 overhaul
+
+`tsushin` started as a CoffeeScript Übersicht widget. In 2026 it was rewritten and modernized:
+
+- Migrated from CoffeeScript to TypeScript/JSX, with a shared widget implementation compiled to both the regular and small variants
+- Switched the package manager from npm to pnpm
+- Added drag-to-reposition, with the dragged position persisted per widget and surviving reinstalls
+- Replaced the old `deployReady_zip.sh`/`install.sh` shell scripts with `pnpm run package` and `pnpm run deploy`, so build/zip/install are one consistent pnpm-based pipeline
+- Fixed a state-persistence bug where running both widgets at once could clobber each other's saved position
+- Refreshed the screenshots, animated previews, and this README
+
+This overhaul was done with heavy assistance from [Claude Code](https://claude.com/claude-code) — most of the migration, tooling rewrite, and bug fixes above were written, reviewed, and tested with it, which is how a change of this size came together in a short amount of time.
 
 ## Notes
 
