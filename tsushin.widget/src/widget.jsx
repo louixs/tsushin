@@ -158,8 +158,8 @@ function renderWidget(state, config) {
             height: config.compact ? 10 : 16,
             opacity: 0.28,
             position: "absolute",
-            right: 4,
-            top: 4,
+            right: 6,
+            top: 6,
             width: config.compact ? 10 : 16,
             zIndex: 20,
         }}/>
