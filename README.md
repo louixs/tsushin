@@ -94,6 +94,20 @@ You can use pixel values or percentages.
 
 The installer preserves your local `config.json` when you reinstall updated widget files.
 
+## Adjust the graph's time window
+
+`tsushin.widget` keeps a rolling window of recent samples and drops anything older, so the graph doesn't stall after long uptimes. By default it shows the last 60 minutes.
+
+To change it, add `windowMinutes` to the widget's `config.json` (same file used for position, see above):
+
+```json
+{
+  "windowMinutes": 120
+}
+```
+
+This sets how many minutes of history the graph retains and displays — raise it to see longer-term trends, lower it for a more responsive, short-term view. Applies to `tsushin.widget` only; `tsushin_small.widget` doesn't have a scrolling graph.
+
 ## Read the graph
 
 - Blue line: download throughput
