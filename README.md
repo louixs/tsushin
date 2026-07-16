@@ -178,12 +178,21 @@ For shared chart behavior, edit:
 
 ## Package zip files
 
-To rebuild a distributable zip:
+To rebuild both distributable zips:
 
 ```bash
-./deployReady_zip.sh tsushin.widget
-./deployReady_zip.sh tsushin_small.widget
+pnpm run package
 ```
+
+This runs the TypeScript build, regenerates both widget directories, and
+zips `tsushin.widget/` and `tsushin_small.widget/` into
+`tsushin.widget.zip` and `tsushin_small.widget.zip` at the repo root. Only
+the known-good widget files (`assets/`, `src/`, `tsushin.jsx`, `tsushin.sh`,
+`config.json`) are included, so local junk like `.DS_Store` or the
+`.tsushin-state` runtime file never ends up in the zip.
+
+If you only need to re-zip an already-built widget (no source changes),
+run `pnpm run zip` instead.
 
 ## Troubleshooting
 

@@ -84,10 +84,12 @@ install_widget() {
   local widget_name
   local destination_dir
   local preserved_config
+  local preserved_state
 
   widget_name=$(basename "${source_dir}")
   destination_dir="${destination_root}/${widget_name}"
   preserved_config=""
+  preserved_state=""
 
   if [ ! -d "${source_dir}" ]; then
     printf 'Missing widget directory: %s\n' "${source_dir}" >&2
@@ -102,12 +104,23 @@ install_widget() {
     convert_js_config_to_json "${destination_dir}/config.js" "${preserved_config}"
   fi
 
+  if [ -f "${destination_dir}/.tsushin-state" ]; then
+    preserved_state=$(mktemp)
+    cp "${destination_dir}/.tsushin-state" "${preserved_state}"
+  fi
+
   rm -rf "${destination_dir}"
   cp -R "${source_dir}" "${destination_dir}"
 
   if [ -n "${preserved_config}" ]; then
     cp "${preserved_config}" "${destination_dir}/config.json"
     rm -f "${preserved_config}"
+  fi
+
+  rm -f "${destination_dir}/.tsushin-state"
+  if [ -n "${preserved_state}" ]; then
+    cp "${preserved_state}" "${destination_dir}/.tsushin-state"
+    rm -f "${preserved_state}"
   fi
 
   printf 'Installed %s -> %s\n' "${widget_name}" "${destination_dir}"

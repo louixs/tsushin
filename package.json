@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "build": "tsc --project tsconfig.json --outDir .build && node scripts/build-widgets.mjs",
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "zip": "node scripts/zip-widgets.mjs",
+    "package": "pnpm run build && pnpm run zip"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
