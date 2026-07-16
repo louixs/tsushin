@@ -31,7 +31,8 @@ Animated previews:
 - Automatic active-interface detection
 - Download and upload lines rendered locally with SVG
 - No external chart library or CDN dependency
-- Local `config.js` file for simple on-screen positioning
+- Drag-to-reposition: grab the grip handle in the corner to move the widget on screen
+- Local `config.json` file for simple on-screen positioning
 - Shared TypeScript implementation for both widget sizes
 
 ## Install
@@ -64,7 +65,9 @@ Typical widget location:
 
 ## Move the widget
 
-After installing, edit the local `config.json` inside the installed widget folder.
+Grab the small grip handle in the widget's top-right corner and drag it to reposition. The new position is written back to the widget's `config.json` automatically, so it persists across refreshes and reinstalls.
+
+You can also position the widget by hand: edit the local `config.json` inside the installed widget folder.
 
 Regular widget:
 
