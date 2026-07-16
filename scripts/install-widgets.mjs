@@ -2,6 +2,7 @@ import { existsSync, cpSync, rmSync, mkdirSync, readFileSync, writeFileSync } fr
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import { spawnSync } from "node:child_process";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -109,7 +110,26 @@ function installWidget(sourceDir, destinationRoot) {
   console.log(`Installed ${widgetName} -> ${destinationDir}`);
 }
 
-const args = process.argv.slice(2);
+// installWidget deletes and recreates the whole widget folder, which can
+// drop Übersicht's file watcher lock on it (live-reload expects in-place
+// edits, not a directory replaced wholesale) — so it can keep rendering the
+// previously loaded version instead of picking up the new one. Force a
+// refresh via Übersicht's AppleScript API rather than relying on the user to
+// notice and reload by hand.
+function refreshUebersicht() {
+  const result = spawnSync("osascript", [
+    "-e",
+    'tell application id "tracesOf.Uebersicht" to refresh',
+  ]);
+
+  if (result.error || result.status !== 0) {
+    console.log("Reload Übersicht to pick up the updated widget files.");
+  } else {
+    console.log("Refreshed Übersicht.");
+  }
+}
+
+const args = process.argv.slice(2).filter((arg) => arg !== "--");
 
 if (args.includes("--help") || args.includes("-h")) {
   usage();
@@ -146,4 +166,4 @@ switch (target) {
     process.exit(1);
 }
 
-console.log("Reload Übersicht to pick up the updated widget files.");
+refreshUebersicht();

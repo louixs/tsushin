@@ -39,8 +39,6 @@ Animated previews:
 
 ## Install
 
-You do not need Node.js just to use the shipped widgets. The generated widget folders are already included in the repo.
-
 From this repo:
 
 ```bash
