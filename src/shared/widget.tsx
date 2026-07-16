@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { join } from "path";
 import { attachDragHandle } from "./draggable";
 import type { CommandEvent, Sample, ViewConfig, WidgetState } from "./types";
 

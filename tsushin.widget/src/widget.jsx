@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { join } from "path";
 import { attachDragHandle } from "./draggable";
 const REFRESH_FREQUENCY = 2000;
 const WINDOW_MS = 60 * 60 * 1000;

@@ -1,4 +1,4 @@
-import { writeFileSync } from "node:fs";
+import { writeFileSync } from "fs";
 /**
  * Wires up mousedown/mousemove/mouseup handlers on `el` so dragging it moves
  * the widget's positioned ancestor (the DOM node Übersicht actually applies
