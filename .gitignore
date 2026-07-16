@@ -5,6 +5,7 @@
 log/
 node_modules/
 .build/
+.tsushin-state
 
 # OS generated files #
 ######################

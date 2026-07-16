@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-sample_seconds=1
-
 detect_interface() {
   local interface_name
 
@@ -68,48 +66,67 @@ read_counters() {
 }
 
 main() {
+  local script_dir
+  local state_file
   local interface_name
-  local first_snapshot
-  local second_snapshot
-  local in_start
-  local out_start
-  local in_end
-  local out_end
+  local snapshot
+  local in_now
+  local out_now
+  local now_ts
+  local prev_interface
+  local prev_ts
+  local in_prev
+  local out_prev
+  local elapsed
   local down_bytes
   local up_bytes
   local down_kb
   local up_kb
+
+  script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+  state_file="${script_dir}/.tsushin-state"
 
   interface_name=$(detect_interface) || {
     printf '{"error":"Unable to detect an active network interface."}\n'
     exit 1
   }
 
-  first_snapshot=$(read_counters "${interface_name}") || true
-  sleep "${sample_seconds}"
-  second_snapshot=$(read_counters "${interface_name}") || true
-
-  if [ -z "${first_snapshot}" ] || [ -z "${second_snapshot}" ]; then
+  snapshot=$(read_counters "${interface_name}") || true
+  if [ -z "${snapshot}" ]; then
     printf '{"error":"Unable to read network counters for %s."}\n' "${interface_name}"
     exit 1
   fi
+  read -r in_now out_now <<<"${snapshot}"
+  now_ts=$(perl -MTime::HiRes=time -e 'printf "%.6f", time')
 
-  read -r in_start out_start <<<"${first_snapshot}"
-  read -r in_end out_end <<<"${second_snapshot}"
+  down_kb=0
+  up_kb=0
 
-  down_bytes=$((in_end - in_start))
-  up_bytes=$((out_end - out_start))
+  if [ -f "${state_file}" ]; then
+    read -r prev_interface prev_ts in_prev out_prev <"${state_file}" || true
 
-  if [ "${down_bytes}" -lt 0 ]; then
-    down_bytes=0
+    if [ "${prev_interface}" = "${interface_name}" ] && [ -n "${prev_ts}" ]; then
+      elapsed=$(awk -v now="${now_ts}" -v prev="${prev_ts}" 'BEGIN { printf "%.6f", now - prev }')
+
+      if awk -v e="${elapsed}" 'BEGIN { exit !(e > 0) }'; then
+        down_bytes=$((in_now - in_prev))
+        up_bytes=$((out_now - out_prev))
+
+        if [ "${down_bytes}" -lt 0 ]; then
+          down_bytes=0
+        fi
+
+        if [ "${up_bytes}" -lt 0 ]; then
+          up_bytes=0
+        fi
+
+        down_kb=$(awk -v bytes="${down_bytes}" -v seconds="${elapsed}" 'BEGIN { printf "%.2f", bytes / 1024 / seconds }')
+        up_kb=$(awk -v bytes="${up_bytes}" -v seconds="${elapsed}" 'BEGIN { printf "%.2f", bytes / 1024 / seconds }')
+      fi
+    fi
   fi
 
-  if [ "${up_bytes}" -lt 0 ]; then
-    up_bytes=0
-  fi
-
-  down_kb=$(awk -v bytes="${down_bytes}" -v seconds="${sample_seconds}" 'BEGIN { printf "%.2f", bytes / 1024 / seconds }')
-  up_kb=$(awk -v bytes="${up_bytes}" -v seconds="${sample_seconds}" 'BEGIN { printf "%.2f", bytes / 1024 / seconds }')
+  printf '%s %s %s %s\n' "${interface_name}" "${now_ts}" "${in_now}" "${out_now}" >"${state_file}"
 
   printf '{"interfaceName":"%s","down":%s,"up":%s}\n' "${interface_name}" "${down_kb}" "${up_kb}"
 }
