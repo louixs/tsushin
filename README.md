@@ -90,7 +90,7 @@ Example:
 }
 ```
 
-You can use pixel values or percentages.
+`left`/`top` are written straight into CSS, so any valid CSS length works — not just `px` and `%`, but also `em`, `vw`/`vh`, `calc()`, etc.
 
 The installer preserves your local `config.json` when you reinstall updated widget files.
 
