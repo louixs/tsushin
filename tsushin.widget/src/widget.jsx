@@ -1,7 +1,6 @@
 import { join } from "path";
 import { attachDragHandle } from "./draggable";
 const REFRESH_FREQUENCY = 2000;
-const DEFAULT_WINDOW_MINUTES = 60;
 const MIN_SCALE_KB = 32;
 const GRID_LINES = 4;
 const DOWN_COLOR = "#6fc3df";
@@ -104,8 +103,7 @@ function parseSample(output) {
     };
 }
 function appendSample(samples, sample, config) {
-    const windowMinutes = config?.windowMinutes ?? DEFAULT_WINDOW_MINUTES;
-    const windowMs = windowMinutes * 60 * 1000;
+    const windowMs = config.windowMinutes * 60 * 1000;
     const cutoff = sample.timestamp - windowMs;
     const nextSamples = [...samples, sample].filter((entry) => entry.timestamp >= cutoff);
     return nextSamples;

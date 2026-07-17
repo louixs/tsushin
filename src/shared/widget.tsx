@@ -3,7 +3,6 @@ import { attachDragHandle } from "./draggable";
 import type { CommandEvent, Sample, ViewConfig, WidgetState } from "./types";
 
 const REFRESH_FREQUENCY = 2000;
-const WINDOW_MS = 60 * 60 * 1000;
 const MIN_SCALE_KB = 32;
 const GRID_LINES = 4;
 
@@ -37,7 +36,7 @@ export function createTsushinWidget(config: ViewConfig) {
     refreshFrequency: REFRESH_FREQUENCY,
     render: (state: WidgetState) => renderWidget(state, config),
     updateState: (event: CommandEvent, previousState: WidgetState) =>
-      updateWidgetState(event, previousState),
+      updateWidgetState(event, previousState, config),
   };
 }
 
@@ -67,7 +66,11 @@ function buildCommand(widgetDir: string): string {
   `;
 }
 
-function updateWidgetState(event: CommandEvent, previousState: WidgetState): WidgetState {
+function updateWidgetState(
+  event: CommandEvent,
+  previousState: WidgetState,
+  config: ViewConfig
+): WidgetState {
   if (event.error) {
     return {
       ...previousState,
@@ -89,7 +92,7 @@ function updateWidgetState(event: CommandEvent, previousState: WidgetState): Wid
       error: null,
       interfaceName: sample.interfaceName,
       lastUpdated: sample.timestamp,
-      samples: appendSample(previousState.samples, sample),
+      samples: appendSample(previousState.samples, sample, config),
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to parse sampler output.";
@@ -122,8 +125,9 @@ function parseSample(output: string): Sample {
   };
 }
 
-function appendSample(samples: Sample[], sample: Sample): Sample[] {
-  const cutoff = sample.timestamp - WINDOW_MS;
+function appendSample(samples: Sample[], sample: Sample, config: ViewConfig): Sample[] {
+  const windowMs = config.windowMinutes * 60 * 1000;
+  const cutoff = sample.timestamp - windowMs;
   const nextSamples = [...samples, sample].filter((entry) => entry.timestamp >= cutoff);
 
   return nextSamples;

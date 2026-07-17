@@ -9,4 +9,5 @@ export const defaultViewConfig = {
     top: "92%",
     width: 200,
     widgetDir: "tsushin_small.widget",
+    windowMinutes: 60,
 };

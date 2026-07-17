@@ -28,4 +28,5 @@ export interface ViewConfig {
   top: string;
   width: number;
   widgetDir: string;
+  windowMinutes: number;
 }

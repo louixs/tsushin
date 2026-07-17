@@ -58,7 +58,7 @@ for (const widget of widgets) {
       "const widget = createTsushinWidget({",
       "  ...defaultViewConfig,",
       "  ...overrides,",
-      "  configDir: defaultViewConfig.widgetDir,",
+      "  configDir: __dirname,",
       "});",
       "",
       "export const className = widget.className;",

@@ -1,7 +1,6 @@
 import { join } from "path";
 import { attachDragHandle } from "./draggable";
 const REFRESH_FREQUENCY = 2000;
-const WINDOW_MS = 60 * 60 * 1000;
 const MIN_SCALE_KB = 32;
 const GRID_LINES = 4;
 const DOWN_COLOR = "#6fc3df";
@@ -30,7 +29,7 @@ export function createTsushinWidget(config) {
         },
         refreshFrequency: REFRESH_FREQUENCY,
         render: (state) => renderWidget(state, config),
-        updateState: (event, previousState) => updateWidgetState(event, previousState),
+        updateState: (event, previousState) => updateWidgetState(event, previousState, config),
     };
 }
 function buildClassName(config) {
@@ -57,7 +56,7 @@ function buildCommand(widgetDir) {
     fi
   `;
 }
-function updateWidgetState(event, previousState) {
+function updateWidgetState(event, previousState, config) {
     if (event.error) {
         return {
             ...previousState,
@@ -76,7 +75,7 @@ function updateWidgetState(event, previousState) {
             error: null,
             interfaceName: sample.interfaceName,
             lastUpdated: sample.timestamp,
-            samples: appendSample(previousState.samples, sample),
+            samples: appendSample(previousState.samples, sample, config),
         };
     }
     catch (error) {
@@ -103,8 +102,9 @@ function parseSample(output) {
         up: Math.max(0, parsed.up),
     };
 }
-function appendSample(samples, sample) {
-    const cutoff = sample.timestamp - WINDOW_MS;
+function appendSample(samples, sample, config) {
+    const windowMs = config.windowMinutes * 60 * 1000;
+    const cutoff = sample.timestamp - windowMs;
     const nextSamples = [...samples, sample].filter((entry) => entry.timestamp >= cutoff);
     return nextSamples;
 }
