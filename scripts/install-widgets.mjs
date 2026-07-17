@@ -110,6 +110,19 @@ function installWidget(sourceDir, destinationRoot) {
   console.log(`Installed ${widgetName} -> ${destinationDir}`);
 }
 
+// When explicitly deploying a single variant, remove any other variant that
+// was previously installed so it doesn't keep running alongside the one the
+// user asked for. Deploying "both" is the explicit opt-in to keep them both.
+function removeOtherWidget(sourceDir, destinationRoot) {
+  const widgetName = basename(sourceDir);
+  const destinationDir = join(destinationRoot, widgetName);
+
+  if (existsSync(destinationDir)) {
+    rmSync(destinationDir, { recursive: true, force: true });
+    console.log(`Removed ${widgetName} -> ${destinationDir} (not requested)`);
+  }
+}
+
 // installWidget deletes and recreates the whole widget folder, which can
 // drop Übersicht's file watcher lock on it (live-reload expects in-place
 // edits, not a directory replaced wholesale) — so it can keep rendering the
@@ -153,9 +166,11 @@ mkdirSync(widgetsDir, { recursive: true });
 switch (target) {
   case "regular":
     installWidget(resolve(rootDir, "tsushin.widget"), widgetsDir);
+    removeOtherWidget(resolve(rootDir, "tsushin_small.widget"), widgetsDir);
     break;
   case "small":
     installWidget(resolve(rootDir, "tsushin_small.widget"), widgetsDir);
+    removeOtherWidget(resolve(rootDir, "tsushin.widget"), widgetsDir);
     break;
   case "both":
     installWidget(resolve(rootDir, "tsushin.widget"), widgetsDir);

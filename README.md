@@ -55,6 +55,8 @@ pnpm run deploy -- both
 pnpm run deploy -- regular "$HOME/Library/Application Support/Übersicht/widgets"
 ```
 
+Installing `regular` or `small` removes the other variant if it was previously installed, so only the requested widget is left running. Use `both` to explicitly keep both installed side by side.
+
 After installation, reload Übersicht or restart the app.
 
 Typical widget location:
