@@ -33,8 +33,7 @@ Animated previews:
 - Automatic active-interface detection
 - Download and upload lines rendered locally with SVG
 - No external chart library or CDN dependency
-- Drag-to-reposition: grab the grip handle in the corner to move the widget on screen
-- Local `config.json` file for simple on-screen positioning
+- Position via a local `config.json` file (left/top, any CSS length)
 - Shared TypeScript implementation for both widget sizes
 
 ## Install
@@ -65,11 +64,9 @@ Typical widget location:
 ~/Library/Application Support/Übersicht/widgets/
 ```
 
-## Move the widget
+## Position the widget
 
-Grab the small grip handle in the widget's top-right corner and drag it to reposition. The new position is written back to the widget's `config.json` automatically, so it persists across refreshes and reinstalls.
-
-You can also position the widget by hand: edit the local `config.json` inside the installed widget folder.
+Position the widget by hand: edit the local `config.json` inside the installed widget folder.
 
 Regular widget:
 
@@ -231,6 +228,7 @@ If you want to start clean, delete the installed widget folder and run `pnpm run
 - Added drag-to-reposition, with the dragged position persisted per widget and surviving reinstalls
 - Replaced the old `deployReady_zip.sh`/`install.sh` shell scripts with `pnpm run package` and `pnpm run deploy`, so build/zip/install are one consistent pnpm-based pipeline
 - Fixed a state-persistence bug where running both widgets at once could clobber each other's saved position
+- Retired drag-to-reposition in favor of config.json-only positioning — it never reliably persisted inside Übersicht's ESM widget bundling
 - Refreshed the screenshots, animated previews, and this README
 
 This overhaul was done with heavy assistance from [Claude Code](https://claude.com/claude-code) — most of the migration, tooling rewrite, and bug fixes above were written, reviewed, and tested with it, which is how a change of this size came together in a short amount of time.

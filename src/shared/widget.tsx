@@ -1,5 +1,3 @@
-import { join } from "path";
-import { attachDragHandle } from "./draggable";
 import type { CommandEvent, Sample, ViewConfig, WidgetState } from "./types";
 
 const REFRESH_FREQUENCY = 2000;
@@ -133,19 +131,6 @@ function appendSample(samples: Sample[], sample: Sample, config: ViewConfig): Sa
   return nextSamples;
 }
 
-function bindDragHandle(el: HTMLElement | null, config: ViewConfig): void {
-  if (!el || el.dataset.dragBound === "true") {
-    return;
-  }
-
-  el.dataset.dragBound = "true";
-
-  attachDragHandle(el, {
-    configPath: join(config.configDir, "config.json"),
-    initial: { left: config.left, top: config.top },
-  });
-}
-
 function renderWidget(state: WidgetState, config: ViewConfig) {
   const latest = state.samples[state.samples.length - 1] ?? null;
   const headerHeight = config.compact ? 18 : 54;
@@ -184,22 +169,6 @@ function renderWidget(state: WidgetState, config: ViewConfig) {
         width: config.width,
       }}
     >
-      <div
-        ref={(el) => bindDragHandle(el, config)}
-        style={{
-          background: "radial-gradient(circle, rgba(176, 230, 245, 0.9) 1px, transparent 1.4px)",
-          backgroundSize: "4px 4px",
-          cursor: "grab",
-          height: config.compact ? 10 : 16,
-          opacity: 0.28,
-          position: "absolute",
-          right: 6,
-          top: 6,
-          width: config.compact ? 10 : 16,
-          zIndex: 20,
-        }}
-      />
-
       {config.compact ? (
         <div
           style={{

@@ -1,6 +1,5 @@
 export const defaultViewConfig = {
     compact: true,
-    configDir: ".",
     height: 50,
     left: "0%",
     lineWidth: 1,
